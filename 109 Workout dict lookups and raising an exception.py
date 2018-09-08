@@ -8,7 +8,7 @@ workout_schedule = {'Friday': 'Shoulders',
 rest, chill, go_train = 'Rest', 'Chill out!', 'Go train {}'
 
 
-def get_workout_motd(day,workout_schedule):
+def get_workout_motd(day):
     """Title case passed in day argument (monday or MONDAY -> Monday)
        and check if it is in the given workout_schedule dict.
 
@@ -21,11 +21,12 @@ def get_workout_motd(day,workout_schedule):
        a 'message of the day'"""
     day = day.lower().title()
 
-    try:
-        tmpVar = workout_schedule[day]
-        return tmpVar
-    except KeyError as error:
-        print("Not a valid Day")
+    if day not in workout_schedule:
+        raise KeyError(f'{day} is not a valid day')
+    
+    workout = workout_schedule.get(day)
 
-day = 'MONgagDAY'
-print(get_workout_motd(day,workout_schedule))
+    return chill if workout == rest else go_train.format(workout)
+
+day = 'Monday'
+print(get_workout_motd(day))
