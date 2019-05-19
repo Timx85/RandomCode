@@ -6,7 +6,6 @@ Write one line of Python that takes this list a and
 makes a new list that has only the even elements of this list in it.
 """
 a = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
-print([number for number in a if number % == 0])
 
-# Can also be done in 1 line
-print([number for number in a if number < varNumber])
+evenList = [number for number in a if number % 2 == 0]
+print(evenList)
