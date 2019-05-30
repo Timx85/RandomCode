@@ -4,9 +4,14 @@ Ask the user for a number and determine whether the number is prime or not.
 You can (and should!) use your answer to Exercise 4 to help you. 
 Take this opportunity to practice using functions, described below.
 """
+import sys
+
 def get_number(prompt):
     '''Returns integer value for input. Prompt is displayed text'''
-    return int(input(prompt))
+    try:
+        return int(input(prompt))
+    except:
+        sys.exit("Stopped")
     
     
 def is_prime(number):
@@ -19,7 +24,7 @@ def is_prime(number):
     #All other primes    
     else:
         prime = True
-        for check_number in range(2, (number / 2)+1):
+        for check_number in range(2, int((number / 2)+1)):
             if number % check_number == 0:
                 prime = False
                 break
