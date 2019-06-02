@@ -12,6 +12,8 @@ Extra:
 Ask the user how strong they want their password to be. 
 For weak passwords, pick a word or two from a list.
 """
+#to do: imoport a wordlist to generate easy passwords from
+
 
 # generate a password with length "passlen" with no duplicate characters in the password
 
