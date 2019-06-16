@@ -29,4 +29,25 @@ print(p)
 def pw_gen(size = 8, chars=string.ascii_letters + string.digits): # + string.punctuation
 	return "".join(random.choice(chars) for _ in range(size))
 
-print(pw_gen(int(input('How many characters in your password?'))))
+print(pw_gen(int(input('How many characters in your password? '))))
+
+#version 3 with using existing words from dictonairy.txt
+with open('dictionary.txt') as dictionary:
+	english_words = [word.strip() for word in dictionary]
+
+while True:
+	i = list(english_words[random.randint(1, len(english_words))])
+
+	if len(i) > 12:
+		k = random.randint(0, len(i)-1)
+		i[k] = str.capitalize(i[k])
+		k = random.randint(0, len(i)-1)
+		i.insert(k, random.choice(string.digits))
+		k = random.randint(0, len(i)-1)
+		i.insert(k, random.choice(string.punctuation))
+
+		print('\n', ''.join(i), '\n')
+
+
+		if input('Type exit or anything to continue: ') == 'exit':
+			break
