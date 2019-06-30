@@ -20,34 +20,33 @@ For weak passwords, pick a word or two from a list.
 import random
 import string
 
-s = "abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?"
-passlen = 8
-p =  "".join(random.sample(s,passlen ))
-print(p)
+#version 3 with using existing words from dictonairy.txt
+with open('dictionary.txt') as dictionary:
+	english_words = [word.strip() for word in dictionary]
+
+def randomPassword():
+	s = "abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?"
+	passlen = 8
+	return  "".join(random.sample(s,passlen ))
 
 # Or one with asking how many chars the password should be
 def pw_gen(size = 8, chars=string.ascii_letters + string.digits): # + string.punctuation
 	return "".join(random.choice(chars) for _ in range(size))
 
+def pw_gen_with_real_words():
+	while True:
+		i = list(english_words[random.randint(1, len(english_words))])
+
+		if len(i) > 12:
+			k = random.randint(0, len(i)-1)
+			i[k] = str.capitalize(i[k])
+			k = random.randint(0, len(i)-1)
+			i.insert(k, random.choice(string.digits))
+			k = random.randint(0, len(i)-1)
+			i.insert(k, random.choice(string.punctuation))
+
+			return ''.join(i)
+
+print(randomPassword())
 print(pw_gen(int(input('How many characters in your password? '))))
-
-#version 3 with using existing words from dictonairy.txt
-with open('dictionary.txt') as dictionary:
-	english_words = [word.strip() for word in dictionary]
-
-while True:
-	i = list(english_words[random.randint(1, len(english_words))])
-
-	if len(i) > 12:
-		k = random.randint(0, len(i)-1)
-		i[k] = str.capitalize(i[k])
-		k = random.randint(0, len(i)-1)
-		i.insert(k, random.choice(string.digits))
-		k = random.randint(0, len(i)-1)
-		i.insert(k, random.choice(string.punctuation))
-
-		print('\n', ''.join(i), '\n')
-
-
-		if input('Type exit or anything to continue: ') == 'exit':
-			break
+print(pw_gen_with_real_words())
